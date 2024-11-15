@@ -1,10 +1,13 @@
-* Bug: a fmtstr vulnerability
-
-  char msg[100];
-  snprintf(msg, sizeof(msg), "Invalid Password! %s\n", buf);
-  printf(msg);
+* Bug
+  The program uses rand() seeded with a fixed value (srand(1337)) to generate the secret password. Since the seed is fixed, the sequence of random numbers is deterministic and can be reproduced by an attacker who understands the logic.
 
 * Exploit
+  Analyze the binary or source code to identify:
 
-  1) overwrite 'secret' with any value
-  2) overwrite the GOT of puts() to print_key()
+  The use of srand(1337) to seed the random number generator.
+  The password generation logic: uppercase letters with a length of 8.
+  Reproduce the password using a Python script that mimics the program's logic:
+
+  1) Seed Python's random number generator with 1337.
+  2) Generate 8 random uppercase letters.
+  3) Input the reproduced password into the program to successfully defuse the bomb.

@@ -20,17 +20,17 @@ CFLAGS += -fstack-protector
 # CFLAGS += -fno-stack-protector
 
 # enable ASLR
-# CFLAGS += -pie -fPIE
+CFLAGS += -pie -fPIE
 
 # disable ASLR
-CFLAGS += -no-pie
+# CFLAGS += -no-pie
 
 ALL := target
 
 .PHONY: all
 all: $(ALL)
 
-target: fmtstr.c
+target: target.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 	checksec --file $@
 
