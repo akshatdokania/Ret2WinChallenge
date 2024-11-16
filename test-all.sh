@@ -7,6 +7,10 @@ ID=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-10} | head -n 1)
 NAME=$(cat NAME)
 PORT=$(cat PORT)
 
+echo $ID
+echo $NAME
+echo $PORT
+
 
 # +1 to make sure that it's independent to the PORT number
 PORT=$(($PORT + 1))

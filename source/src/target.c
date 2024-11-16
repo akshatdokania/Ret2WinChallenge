@@ -2,6 +2,36 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+void read_flag(){
+    // Open the flag file
+    int fd = open("flag", O_RDONLY);
+    if (fd < 0) {
+        perror("Error opening flag file");
+        exit(1);
+    }
+
+    // Read the flag content
+    char flag[50];
+    ssize_t bytes_read = read(fd, flag, sizeof(flag) - 1);
+
+    if (bytes_read < 0) {
+        perror("Error reading flag file");
+        close(fd);
+        exit(1);
+    }
+
+    // Null-terminate the flag string
+    flag[bytes_read] = '\0';
+
+    // Print the flag
+    printf("Flag: %s\n", flag);
+
+    // Close the file descriptor
+    close(fd);
+}
 
 // Function to generate the secret password
 void generate_password(char *password, int length) {
@@ -19,6 +49,7 @@ void bomb_explodes() {
 
 void bomb_defused() {
     printf("\n🎉 Congratulations! You defused the bomb! 🎉\n");
+    read_flag();
     exit(0);
 }
 

@@ -6,7 +6,7 @@ import string
 
 # Configuration
 HOST = '127.0.0.1'
-PORT = 11111
+PORT = 11112
 
 def generate_random_guess(length):
     # Generate a random string of the given length
