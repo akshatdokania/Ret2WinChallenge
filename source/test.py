@@ -16,7 +16,7 @@ def test():
     # Connect to the remote service
     print(f"Connecting to {HOST}:{PORT}...")
     p = remote(HOST, PORT)
-    
+
     # Receive the program's initial output
     try:
         banner = p.recvline().decode().strip()
@@ -25,7 +25,7 @@ def test():
         print("Error: Did not receive expected output from the target.")
         p.close()
         exit(1)
-
+    
     # Generate a random password guess and send it
     random_guess = generate_random_guess(8)
     print(f"Sending random guess: {random_guess}")
